@@ -73,13 +73,12 @@ def question_context_splitter(qs):
     return ques, idx
 
 
-
 def change_to_mujib(questions):
     mujib_names = ["বঙ্গবন্ধু", "বঙ্গবন্ধুর", "শেখ মুজিবুর রহমান",
-               "শেখ মুজিব",   "জাতির পিতা", "জাতির জনক"]
+                   "শেখ মুজিব",   "জাতির পিতা", "জাতির জনক"]
     changed_question = []
     for question in questions:
-        
+
         altered_ques = question
 
         for name in mujib_names:
@@ -88,33 +87,25 @@ def change_to_mujib(questions):
         while "মুজিব মুজিব" in altered_ques:
             altered_ques = altered_ques.replace("মুজিব মুজিব", "মুজিব")
         changed_question.append(altered_ques)
-    
-    
+
     return changed_question
 
 
 def bow(sentences):
     from collections import Counter
-    
-
 
     word_ls = []
 
     for sen in sentences:
         word_ls.extend(sen.split())
         # print(len(word_ls))
-        
 
     print(len(word_ls))
-        
 
     Counter = Counter(word_ls)
     most_occured_20 = Counter.most_common(20)
     # print(most_occured_20)
-        
 
     most_occured_50 = Counter.most_common(50)
-    
+
     return most_occured_20, most_occured_50
-    
-        
