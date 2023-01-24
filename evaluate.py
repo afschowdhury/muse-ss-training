@@ -1,17 +1,18 @@
 from sentence_transformers import SentenceTransformer
-import numpy as np
 import torch
-import pickle
 from sentence_transformers.util import semantic_search
-import json
 
 
-# model instantiation
+# ***********model path ***********
 
 # model_path = "data/model/st-model/16500"
 # model_path = "data/model/st-model-1/37500"
-# last saved model 
+
+# ********* last saved model *********
 model_path = "data/model/st-model-2/12000"
+
+# ***************** model instantiation *****************
+
 # retriever_model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 retriever_model = SentenceTransformer(model_path)
 
@@ -21,7 +22,7 @@ def get_embeddings(sentences):
     return embeddings
 
 
-def evaluate(ques, index, base_embeddings, base_index):
+def evaluate(ques, index, base_embeddings, base_index, qs):
 
     model_idx = []
     for q in ques:
@@ -43,7 +44,9 @@ def evaluate(ques, index, base_embeddings, base_index):
         if f_d[i] == index[i]:
             count += 1
 
-    print(f"Successfully indexed: {count} questions out of {len(index)}")
+    print("="*15+f" {qs} Evaluation "+"="*15)
+    print()
+    print(f"\tSuccessfully indexed: {count} questions out of {len(index)}")
 
     model_accuracy = count/len(index)
-    print("Models Accuracy : ", model_accuracy)
+    print("\tModel's Accuracy : ", model_accuracy)
